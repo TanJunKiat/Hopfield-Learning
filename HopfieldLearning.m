@@ -10,100 +10,63 @@ digitDatasetPath = fullfile(pwd);
 imds = imageDatastore(digitDatasetPath, ...
     'IncludeSubfolders',true,'LabelSource','foldernames');
 
-%% 
-W = 0;
-d = 120;
-N = 8;
+[h, w, d] = size(readimage(imds,1));
+
+%% Initialisation
+W = 0;              % Weight matrix
+d = h*w;            % Effective pixel ( H x W )
+N = 8;              % Number of training images
 
 %% Read memory images and weight matrix
-for i = 1:1:8
-input = readimage(imds,i);
-for j = 1:1:12
-    for k = 1:1:10
-        s(j+(k-1)*12,1) = double(input (j,k));
-    end
-end
-    for j = 1:1:120
-       if s(j) == 255
-           s(j) = 1;
-       else
-           s(j) = -1;
-       end
-    end
-    W = W + s*transpose(s);
-end
-for i = 1:1:120
-   W (i,i) = 0; 
+for i = 1:N
+input = readimage(imds,i);          % Reading image
+
+s = reshape(double(input(:,:,1)),[],1);         % Reshaping into a vector
+s = s./127.5 - 1;                               % Normalisation
+W = W + s*transpose(s);                         % Self-addition of weight matrix
 end
 
-W = (1/d)*W - (N/d)*(eye(120));
+W = W - diag(diag(W));
+W = (1/d)*W - (N/d)*(eye(d));
 
-%% Initial pattern
-initial = readimage(imds,15);
-for j = 1:1:12
-    for k = 1:1:10
-        x(j+(k-1)*12,1) = double(initial(j,k));
-    end
-end
-
-for j = 1:1:120
-    if x(j) == 255
-        x(j) = 1;
-    else
-        x(j) = -1;
-    end
-end
-    
-o = x;
+%% Corrupted pattern for testing
+initial = readimage(imds,14);                   % Reads corrupted image
+x = reshape(double(initial(:,:,1)),[],1);       % Reshaping into a vector
+x = x./127.5 - 1;                               % Normalisation
 
 %% Iterations
-iterations = 16;
-for i = 1:1:iterations
-    product = W*o;
-    for j = 1:1:120
-        if product (j) >= 0
-            o(j) = 1;
-        else
-            o(j) = -1;
-        end
-    end
-    for j = 1:1:120
-        iterationstore (j,i) = o(j);
-    end
+o = x;                                          % Initialising output
+iterations = 16;                                % Number of iterations
+for i = 1:iterations
+    product = W*o;                              % Calculating neuron outputs
+    o(find(product>=0)) = 1;                    % Digitizing output
+    o(find(product<0)) = -1;                    % Digitizing output
+    iterationstore(:,i) = o;                    % Storing output
 end
 
-for j = 1:1:12
-    for k = 1:1:10
-        output (j,k) = o(j+(k-1)*12,1);
-    end
-end
-
-for i = 1:1:iterations
-for j = 1:1:12
-    for k = 1:1:10
-        outputstore (j,k,i) = iterationstore(j+(k-1)*12,i);
-    end
-end
-end
-
+outputstore = reshape(iterationstore(:,:,1),h,w,iterations);    % Restoring output vector as 2D image
 
 %% Plotting of figures
-% Training data
+% Plotting of training data
 figure (1)
-for i = 1:1:8
+for i = 1:8
         subplot (2,4,i), imshow (readimage(imds,i));
 end
-% Training precevied
+
+% Plotting of network's interpretation of training data
 figure (2)
-for i = 1:1:8
+for i = 1:8
         subplot (2,4,i), imshow (readimage(imds,i+8));
 end
-% Restoration
+
+% Plotting of image restoration iterations
 figure (3)
 subplot (2,4,1), imshow (initial)
 title ("Input image")
-for i = 1:1:7
+for i = 1:7
         subplot (2,4,i+1), imshow (outputstore(:,:,i));
         title (["After", num2str(i), "iterations"])
 end
+
+
 
