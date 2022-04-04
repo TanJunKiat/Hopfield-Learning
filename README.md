@@ -8,7 +8,8 @@ CONTENTS OF THIS FILE
 3. Test data
     a. Corrupted number 0 to 9
 
- * Introduction
+Introduction
+---------------------
 A simple example on Hopfield learning 
  * Requirements
  * Recommended modules
