@@ -14,6 +14,7 @@ CONTENTS OF THIS FILE
    - 7.png
    - 8.png
    - 9.png
+   - dot.png
 3. Test data (Corrupted number 0 to 9)
    - dpcorrupted0.png
    - dpcorrupted1.png
@@ -25,6 +26,7 @@ CONTENTS OF THIS FILE
    - dpcorrupted7.png
    - dpcorrupted8.png
    - dpcorrupted9.png
+   - dpcorrupteddot.png
 
 Introduction
 ---------------------
