@@ -10,11 +10,19 @@ CONTENTS OF THIS FILE
 
 Introduction
 ---------------------
-A simple example on Hopfield learning 
- * Requirements
- * Recommended modules
- * Installation
- * Configuration
- * Troubleshooting
- * FAQ
- * Maintainers
+A simple example on Hopfield learning
+
+Requirements
+ ---------------------
+Recommended modules
+---------------------
+Installation
+---------------------
+Configuration
+---------------------
+Troubleshooting
+---------------------
+FAQ
+---------------------
+Maintainers
+---------------------
