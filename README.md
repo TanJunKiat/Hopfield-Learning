@@ -33,7 +33,10 @@ Introduction
 A simple example on Hopfield learning
 
 Requirements
- ---------------------
+---------------------
+- MATLAB R2015b and above
+   -  Image processing toolbox
+
 Recommended modules
 ---------------------
 Installation
