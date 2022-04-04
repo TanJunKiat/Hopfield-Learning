@@ -37,15 +37,12 @@ Requirements
 - MATLAB R2015b and above
    -  Image processing toolbox
 
-Recommended modules
----------------------
 Installation
 ---------------------
-Configuration
----------------------
-Troubleshooting
----------------------
-FAQ
----------------------
+1. Download the folder and extract it in your workspace
+2. Launch "Hopfield_learning.m" using MATLAB
+3. Click "Run"
+
 Maintainers
 ---------------------
+1. Tan Jun Kiat (junkiat@hotmail.com)
