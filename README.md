@@ -4,9 +4,9 @@ CONTENTS OF THIS FILE
 ---------------------
 1. Hopfield_learning.m
 2. Training data
-a. Number 0 to 9
+- Number 0 to 9
 3. Test data
-a. Corrupted number 0 to 9
+- Corrupted number 0 to 9
 
 Introduction
 ---------------------
