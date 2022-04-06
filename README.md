@@ -40,8 +40,21 @@ Requirements
 Installation
 ---------------------
 1. Download the folder and extract it in your workspace
-2. Launch "Hopfield_learning.m" using MATLAB
-3. Click "Run"
+
+
+Usage
+---------------------
+1. Launch "Hopfield_learning.m" using MATLAB
+2. Click "Run"
+
+Additional Information
+---------------------
+### TBC
+
+
+FAQ / Troubleshooting
+---------------------
+### TBC
 
 Maintainers
 ---------------------
